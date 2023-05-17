@@ -7,13 +7,35 @@ environment:
   sdk: '>=2.19.6 <3.0.0'
 
 dependencies:
+  dio: ^5.1.2
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.2
+  flutter_svg: ^2.0.5
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.1
+  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.3.3
+  freezed: ^2.3.4
+  json_serializable: ^6.6.2
 
 flutter:
   uses-material-design: true
+  assets: 
+    - assets/images/
+  fonts:
+    - family: Raleway
+      fonts: 
+        - asset: assets/fonts/Raleway-Bold.ttf
+          weight: 600
+        - asset: assets/fonts/Raleway-SemiBold.ttf
+          weight: 700
+        - asset: assets/fonts/Raleway-ExtraBold.ttf
+          weight: 800
+
+    
