@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:potential_octo_engine_app/core/constants/constant_colors.dart';
 import 'package:potential_octo_engine_app/core/local_database/bloc/local_data_bloc.dart';
@@ -38,7 +39,7 @@ class _AppBottonNavigationState extends State<AppBottonNavigation> {
                       height: 8,
                     ),
                     Text(
-                      'Еда',
+                      AppLocalizations.of(context)!.food,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: index == 0 ? secondaryColor : offColor,
                       ),
@@ -117,7 +118,7 @@ class _TextAtom extends StatelessWidget {
         );
       },
     );
-    return Text(price > 0 ? '$price ₽' : 'Корзина',
+    return Text(price > 0 ? '$price ₽' : AppLocalizations.of(context)!.basket,
         style: theme.textTheme.bodySmall?.copyWith(
           color: index == 0 ? secondaryColor : offColor,
         ));

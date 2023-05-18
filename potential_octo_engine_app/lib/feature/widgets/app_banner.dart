@@ -46,6 +46,7 @@ class _TimerWidget extends StatefulWidget {
 class __TimerWidgetState extends State<_TimerWidget>
     with WidgetsBindingObserver {
   Timer? _timer;
+  Duration duration = const Duration(minutes: 10);
   @override
   void didChangeAccessibilityFeatures() {
     print('object');
@@ -70,19 +71,15 @@ class __TimerWidgetState extends State<_TimerWidget>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
+        duration = const Duration(minutes: 10);
         _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-          setState(() {});
+          setState(setCountDown);
         });
         break;
-
       case AppLifecycleState.inactive:
         _timer?.cancel();
         break;
-      case AppLifecycleState.paused:
-        // TODO: Handle this case.
-        break;
-      case AppLifecycleState.detached:
-        // TODO: Handle this case.
+      default:
         break;
     }
   }
@@ -91,9 +88,21 @@ class __TimerWidgetState extends State<_TimerWidget>
   void initState() {
     super.initState();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {});
+      setState(setCountDown);
     });
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  void setCountDown() {
+    const reduceSecondsBy = 1;
+    setState(() {
+      final seconds = duration.inSeconds - reduceSecondsBy;
+      if (seconds < 0) {
+        _timer!.cancel();
+      } else {
+        duration = Duration(seconds: seconds);
+      }
+    });
   }
 
   @override
@@ -106,8 +115,11 @@ class __TimerWidgetState extends State<_TimerWidget>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    String strDigits(int n) => n.toString().padLeft(2, '0');
+    final minutes = strDigits(duration.inMinutes.remainder(60));
+    final seconds = strDigits(duration.inSeconds.remainder(60));
     return Text(
-      '10:${_timer?.tick}',
+      '$minutes : $seconds',
       style: theme.textTheme.displaySmall,
     );
   }

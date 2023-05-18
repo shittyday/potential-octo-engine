@@ -1,5 +1,6 @@
 {
     "wanted": "Wanted",
     "category":"Category",
-    "basket":"Shop"
+    "basket":"Shop",
+    "food":"Food"
 }
