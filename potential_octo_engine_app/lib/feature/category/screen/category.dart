@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:potential_octo_engine_app/feature/category/bloc/category_bloc.dart';
 import 'package:potential_octo_engine_app/feature/category/widgets/menu_card.dart';
 import 'package:potential_octo_engine_app/feature/widgets/app_banner.dart';
@@ -12,7 +13,7 @@ class Category extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Категории'),
+            title: Text(AppLocalizations.of(context)!.category),
           ),
           body: const _Body()),
     );

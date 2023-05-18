@@ -117,12 +117,9 @@ class _TextAtom extends StatelessWidget {
         );
       },
     );
-
-    return Text(
-      price > 0 ? '$price' : 'Корзина',
-      style: theme.textTheme.bodySmall?.copyWith(
-        color: index == 0 ? secondaryColor : offColor,
-      ),
-    );
+    return Text(price > 0 ? '$price ₽' : 'Корзина',
+        style: theme.textTheme.bodySmall?.copyWith(
+          color: index == 0 ? secondaryColor : offColor,
+        ));
   }
 }

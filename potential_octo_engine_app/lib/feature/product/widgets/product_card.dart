@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:potential_octo_engine_app/core/api/data/models/product.dart'
     as model;
 import 'package:potential_octo_engine_app/core/constants/constant_colors.dart';
@@ -87,12 +88,13 @@ class _ProductCardState extends State<ProductCard> {
                                       LocalDataEvent.save(
                                           product: widget.product));
                                 },
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
                                     horizontal: 38,
                                     vertical: 13,
                                   ),
-                                  child: Text('Хочу'),
+                                  child: Text(
+                                      AppLocalizations.of(context)!.wanted),
                                 ),
                               )
                             ],

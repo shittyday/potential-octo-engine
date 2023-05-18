@@ -8,6 +8,7 @@ import 'package:potential_octo_engine_app/core/theme/app_theme_data.dart';
 import 'package:potential_octo_engine_app/feature/category/bloc/category_bloc.dart';
 import 'package:potential_octo_engine_app/feature/netsted_navigator.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final globalKey = GlobalKey<NavigatorState>();
 void main() async {
@@ -39,6 +40,8 @@ class MainApp extends StatelessWidget {
             globalKey,
           ),
           child: MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
             navigatorKey: globalKey,
             theme: AppThemeData.themeData,
             home: Builder(

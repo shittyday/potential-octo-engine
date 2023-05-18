@@ -6,3 +6,4 @@ const Color primaryColor = Color(0xFFFE5000);
 const Color fontColor = Color(0xFF747C8A);
 const Color offColor = Color(0xFF9EA7B6);
 const Color greyColor = Color(0xFFD8DEE9);
+const Color greyColor1 = Color(0xFFF1F4F9);

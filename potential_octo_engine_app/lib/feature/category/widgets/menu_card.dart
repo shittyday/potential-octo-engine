@@ -24,7 +24,7 @@ class MenuCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Image.network(
                 menu.imageUrl,
                 errorBuilder: (context, error, stackTrace) {
