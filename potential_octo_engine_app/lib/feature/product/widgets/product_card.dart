@@ -3,14 +3,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:potential_octo_engine_app/core/api/data/models/product.dart'
     as model;
 import 'package:potential_octo_engine_app/core/constants/constant_colors.dart';
+import 'package:potential_octo_engine_app/core/local_database/bloc/local_data_bloc.dart';
+import 'package:potential_octo_engine_app/core/local_database/event/local_data_event.dart';
 import 'package:potential_octo_engine_app/core/route_repository.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final model.Product product;
   const ProductCard({
     super.key,
     required this.product,
   });
+
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<LocalDataBloc>().stream.listen((event) {
+      event.whenOrNull(
+        error: (error) {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('$error')));
+        },
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +54,7 @@ class ProductCard extends StatelessWidget {
                             height: 26,
                           ),
                           Image.network(
-                            product.imageUrl,
+                            widget.product.imageUrl,
                             errorBuilder: (context, error, stackTrace) {
                               return const Placeholder(
                                 fallbackHeight: 200,
@@ -44,7 +65,7 @@ class ProductCard extends StatelessWidget {
                             height: 24,
                           ),
                           Text(
-                            product.name,
+                            widget.product.name,
                             style: theme.displaySmall,
                           ),
                           const SizedBox(
@@ -54,14 +75,18 @@ class ProductCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '${product.cost} ₽',
+                                '${widget.product.cost} ₽',
                                 style: theme.displayLarge?.copyWith(
                                   fontSize: 22,
                                   height: 25.83 / 22,
                                 ),
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.read<LocalDataBloc>().add(
+                                      LocalDataEvent.save(
+                                          product: widget.product));
+                                },
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 38,
@@ -72,12 +97,12 @@ class ProductCard extends StatelessWidget {
                               )
                             ],
                           ),
-                          if (product.description != null) ...[
+                          if (widget.product.description != null) ...[
                             const SizedBox(
                               height: 24,
                             ),
                             Text(
-                              product.description!,
+                              widget.product.description!,
                               style:
                                   theme.bodySmall?.copyWith(color: fontColor),
                             ),
@@ -108,7 +133,7 @@ class ProductCard extends StatelessWidget {
                 child: Padding(
               padding: const EdgeInsets.all(12),
               child: Image.network(
-                product.imageUrl,
+                widget.product.imageUrl,
                 errorBuilder: (context, error, stackTrace) {
                   return const Placeholder(
                     fallbackHeight: 200,
@@ -119,7 +144,7 @@ class ProductCard extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Text(
-                  product.name,
+                  widget.product.name,
                   style: theme.bodySmall,
                 )),
             Padding(
@@ -128,14 +153,18 @@ class ProductCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${product.cost} ₽',
+                    '${widget.product.cost} ₽',
                     style: theme.headlineMedium?.copyWith(
                       fontSize: 22,
                       height: 25.83 / 22,
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context
+                            .read<LocalDataBloc>()
+                            .add(LocalDataEvent.save(product: widget.product));
+                      },
                       child: const Icon(
                         Icons.add,
                         size: 15,

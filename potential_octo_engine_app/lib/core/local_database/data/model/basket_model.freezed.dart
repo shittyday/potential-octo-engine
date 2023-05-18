@@ -20,7 +20,9 @@ BasketModel _$BasketModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BasketModel {
-  Product get product => throw _privateConstructorUsedError;
+  int get product_id => throw _privateConstructorUsedError;
+  double get total_price => throw _privateConstructorUsedError;
+  int get quantity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,7 @@ abstract class $BasketModelCopyWith<$Res> {
           BasketModel value, $Res Function(BasketModel) then) =
       _$BasketModelCopyWithImpl<$Res, BasketModel>;
   @useResult
-  $Res call({Product product});
+  $Res call({int product_id, double total_price, int quantity});
 }
 
 /// @nodoc
@@ -50,13 +52,23 @@ class _$BasketModelCopyWithImpl<$Res, $Val extends BasketModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
+    Object? product_id = null,
+    Object? total_price = null,
+    Object? quantity = null,
   }) {
     return _then(_value.copyWith(
-      product: null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
+      product_id: null == product_id
+          ? _value.product_id
+          : product_id // ignore: cast_nullable_to_non_nullable
+              as int,
+      total_price: null == total_price
+          ? _value.total_price
+          : total_price // ignore: cast_nullable_to_non_nullable
+              as double,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -69,7 +81,7 @@ abstract class _$$_BasketModelCopyWith<$Res>
       __$$_BasketModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Product product});
+  $Res call({int product_id, double total_price, int quantity});
 }
 
 /// @nodoc
@@ -83,13 +95,23 @@ class __$$_BasketModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
+    Object? product_id = null,
+    Object? total_price = null,
+    Object? quantity = null,
   }) {
     return _then(_$_BasketModel(
-      product: null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product,
+      product_id: null == product_id
+          ? _value.product_id
+          : product_id // ignore: cast_nullable_to_non_nullable
+              as int,
+      total_price: null == total_price
+          ? _value.total_price
+          : total_price // ignore: cast_nullable_to_non_nullable
+              as double,
+      quantity: null == quantity
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -97,17 +119,25 @@ class __$$_BasketModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_BasketModel extends _BasketModel {
-  const _$_BasketModel({required this.product}) : super._();
+  const _$_BasketModel(
+      {required this.product_id,
+      required this.total_price,
+      required this.quantity})
+      : super._();
 
   factory _$_BasketModel.fromJson(Map<String, dynamic> json) =>
       _$$_BasketModelFromJson(json);
 
   @override
-  final Product product;
+  final int product_id;
+  @override
+  final double total_price;
+  @override
+  final int quantity;
 
   @override
   String toString() {
-    return 'BasketModel(product: $product)';
+    return 'BasketModel(product_id: $product_id, total_price: $total_price, quantity: $quantity)';
   }
 
   @override
@@ -115,12 +145,18 @@ class _$_BasketModel extends _BasketModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BasketModel &&
-            (identical(other.product, product) || other.product == product));
+            (identical(other.product_id, product_id) ||
+                other.product_id == product_id) &&
+            (identical(other.total_price, total_price) ||
+                other.total_price == total_price) &&
+            (identical(other.quantity, quantity) ||
+                other.quantity == quantity));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, product);
+  int get hashCode =>
+      Object.hash(runtimeType, product_id, total_price, quantity);
 
   @JsonKey(ignore: true)
   @override
@@ -137,14 +173,21 @@ class _$_BasketModel extends _BasketModel {
 }
 
 abstract class _BasketModel extends BasketModel {
-  const factory _BasketModel({required final Product product}) = _$_BasketModel;
+  const factory _BasketModel(
+      {required final int product_id,
+      required final double total_price,
+      required final int quantity}) = _$_BasketModel;
   const _BasketModel._() : super._();
 
   factory _BasketModel.fromJson(Map<String, dynamic> json) =
       _$_BasketModel.fromJson;
 
   @override
-  Product get product;
+  int get product_id;
+  @override
+  double get total_price;
+  @override
+  int get quantity;
   @override
   @JsonKey(ignore: true)
   _$$_BasketModelCopyWith<_$_BasketModel> get copyWith =>

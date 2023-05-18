@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:potential_octo_engine_app/core/constants/constant_colors.dart';
+import 'package:potential_octo_engine_app/core/local_database/bloc/local_data_bloc.dart';
 
 class AppBottonNavigation extends StatefulWidget {
   final GlobalKey<NavigatorState> _navigatorState;
@@ -65,12 +67,7 @@ class _AppBottonNavigationState extends State<AppBottonNavigation> {
                     const SizedBox(
                       height: 4.81,
                     ),
-                    Text(
-                      'Корзина',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: index == 0 ? secondaryColor : offColor,
-                      ),
-                    )
+                    _TextAtom(index: index),
                   ],
                 ),
               ),
@@ -92,6 +89,39 @@ class _AppBottonNavigationState extends State<AppBottonNavigation> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _TextAtom extends StatelessWidget {
+  final int index;
+  const _TextAtom({
+    required this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final price = context.select<LocalDataBloc, double>(
+      (value) {
+        return value.state.maybeWhen(
+          orElse: () => 0.0,
+          loaded: (basket) {
+            double price = 0;
+            for (var element in basket) {
+              price = price + element.total_price;
+            }
+            return price;
+          },
+        );
+      },
+    );
+
+    return Text(
+      price > 0 ? '$price' : 'Корзина',
+      style: theme.textTheme.bodySmall?.copyWith(
+        color: index == 0 ? secondaryColor : offColor,
       ),
     );
   }
